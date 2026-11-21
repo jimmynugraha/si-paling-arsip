@@ -11,7 +11,10 @@ const ADMIN_PIN = (process.env.ADMIN_PIN || '').trim();
 const BASE_STORAGE = process.env.STORAGE_DIR ? path.resolve(process.env.STORAGE_DIR) : __dirname;
 const DATA_DIR = path.join(BASE_STORAGE, 'data');
 const UPLOAD_DIR = path.join(BASE_STORAGE, 'uploads');
-const PUBLIC_DIR = path.join(__dirname, 'public');
+const PUBLIC_SUBDIR = path.join(__dirname, 'public');
+const PUBLIC_DIR = fs.existsSync(path.join(PUBLIC_SUBDIR, 'index.html'))
+  ? PUBLIC_SUBDIR
+  : __dirname;
 const DB_FILE = path.join(DATA_DIR, 'archives.json');
 
 // Ensure required directories exist
@@ -125,7 +128,15 @@ const upload = multer({
 });
 
 app.use(express.json({ limit: '5mb' }));
-app.use(express.static(PUBLIC_DIR));
+if (PUBLIC_DIR === PUBLIC_SUBDIR) {
+  app.use(express.static(PUBLIC_DIR));
+} else {
+  // Fallback when frontend files are placed in root directory
+  app.get('/', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'index.html')));
+  ['/index.html', '/styles.css', '/app.js', '/share.js'].forEach((file) => {
+    app.get(file, (_req, res) => res.sendFile(path.join(PUBLIC_DIR, file.slice(1))));
+  });
+}
 
 // Auth status & PIN check
 app.get('/api/auth/status', (_req, res) => {
