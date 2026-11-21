@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Si Paling Arsip — Berkas Dibagikan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="share-shell">
+    <div id="shareCard" class="share-card">
+      <div class="share-header">
+        <div class="viewer-badges" id="shareBadges"></div>
+        <h1 id="shareTitle">Memuat berkas...</h1>
+      </div>
+
+      <div class="viewer-toolbar">
+        <div class="toolbar-actions">
+          <a id="btnShareDownload" class="btn btn-primary btn-sm" href="#">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Unduh Berkas
+          </a>
+          <button id="btnShareCopyText" class="btn btn-secondary btn-sm hidden">Salin Teks</button>
+          <button id="btnShareCopyLink" class="btn btn-secondary btn-sm">Salin Link</button>
+        </div>
+      </div>
+
+      <div id="shareMeta" class="viewer-meta"></div>
+      <div id="shareBody" class="share-body"></div>
+    </div>
+
+    <p class="share-footer-note">
+      Dibagikan melalui <strong>Si Paling Arsip</strong> · Tampilan hanya-baca (read-only)
+    </p>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="/share.js"></script>
+</body>
+</html>
