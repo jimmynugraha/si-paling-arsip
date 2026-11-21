@@ -1,0 +1,14 @@
+{
+  "name": "si-paling-arsip",
+  "version": "1.0.0",
+  "description": "Website minimalis untuk menyimpan, mencari, membaca ulang, dan membagikan arsip berkas PDF, PPT, dan Teks/SOP.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
